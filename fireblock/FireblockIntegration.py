@@ -1,3 +1,11 @@
+“””” This script is authored jointly by 
+the Paris Observatory VAMDC team (C.M. Zwölf and N. Moreau) and 
+the Fireblock.io team
+for integrating into the VAMDC Query Store the certification 
+facilities provided by Fireblock.io
+This collaboration was performed on November 2018
+“”” 
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import MySQLdb
@@ -62,7 +70,7 @@ def signature(cmd, f):
             logger.error(e.output.decode())
             return None
             
-            def find_files_to_process(cursor):
+def find_files_to_process(cursor):
     """list files to sign (and create a zip)"""
     sql = "SELECT UUID FROM Queries WHERE dataURL is  NOT NULL AND biblioGraphicReferences is NOT NULL"
     cursor.execute(sql)
