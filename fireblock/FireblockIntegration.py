@@ -107,12 +107,10 @@ def zip_file(tmp_folder, f):
     
 def certify_file(tmp_folder, f, cursor):
     """certify xsams and zip files"""  
-    cmd_sign_xsams = [ 'fio', 'sign', '-j', '-f', KEY_FILE_PATH, tmp_folder + "/" + f + FILE_EXTENSION ]
-    cmd_sign_zip = [ 'fio', 'sign', '-j', '-f', KEY_FILE_PATH, XSAMS_DEST_FOLDER + "/" + f + '.zip' ]
-    # sign xsams
+    """certify xsams and zip files"""  
+    cmd_sign_xsams = [ 'sha256sum', tmp_folder + "/" + f + FILE_EXTENSION ]
     hash = signature(cmd_sign_xsams, f + FILE_EXTENSION)
-    hash2 = signature(cmd_sign_zip, f + '.zip')
-    if (hash and hash2):
+    if(hash):
         insert_signature_in_db(cursor, hash, f)
         
         
